@@ -15,7 +15,7 @@ public class App extends Application {
         super.onCreate();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://intservice.uz/api.php/")
+                .baseUrl("https://intservice.uz/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

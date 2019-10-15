@@ -16,12 +16,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uz.mrmanager.myapplication.Adapter.PostsAdapter;
 import uz.mrmanager.myapplication.Service.ModelRequest;
-import uz.mrmanager.myapplication.Service.PostModel;
+import uz.mrmanager.myapplication.Service.MyResponse;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<PostModel> posts;
+    ArrayList<MyResponse> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +30,24 @@ public class MainActivity extends AppCompatActivity {
 
         posts = new ArrayList<>();
 
-        recyclerView =  findViewById(R.id.posts_recycle_view);
+        recyclerView = findViewById(R.id.posts_recycle_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         PostsAdapter adapter = new PostsAdapter(posts);
         recyclerView.setAdapter(adapter);
 
-        App.getApi().get(new ModelRequest("userApi", "userPSWD123", 1, 5)).enqueue(new Callback<PostModel>() {
+        App.getApi().getData(new ModelRequest("userApi", "userPSWD123", 2, 3)).enqueue(new Callback<List<MyResponse>>() {
             @Override
-            public void onResponse(Call<PostModel> call, Response<PostModel> response) {
+            public void onResponse(Call<List<MyResponse>> call, Response<List<MyResponse>> response) {
                 posts.addAll(response.body());
+                Toast.makeText(MainActivity.this, "data size " + response.body().size(), Toast.LENGTH_LONG).show();
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<PostModel> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "An error occurred during networking", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<MyResponse>> call, Throwable t) {
+
             }
         });
     }

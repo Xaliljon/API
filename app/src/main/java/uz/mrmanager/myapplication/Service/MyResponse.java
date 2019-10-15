@@ -9,11 +9,23 @@ public class MyResponse {
     String userId;
     @SerializedName("ACTION_TYPE")
     String actionType;
+    @SerializedName("DATE")
+    String date;
 
-    public MyResponse(String id, String userId, String actionType) {
+
+    public MyResponse(String id, String userId, String actionType,String date) {
         this.id = id;
         this.userId = userId;
         this.actionType = actionType;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getId() {

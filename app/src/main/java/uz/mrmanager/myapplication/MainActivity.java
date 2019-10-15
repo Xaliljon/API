@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         posts = new ArrayList<>();
 
         recyclerView = findViewById(R.id.posts_recycle_view);
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         PostsAdapter adapter = new PostsAdapter(posts);
         recyclerView.setAdapter(adapter);
 
-        App.getApi().getData(new ModelRequest("userApi", "userPSWD123", 2, 3)).enqueue(new Callback<List<MyResponse>>() {
+        App.getApi().getData(new ModelRequest("userApi", "userPSWD123", 1, 5)).enqueue(new Callback<List<MyResponse>>() {
             @Override
             public void onResponse(Call<List<MyResponse>> call, Response<List<MyResponse>> response) {
                 posts.addAll(response.body());

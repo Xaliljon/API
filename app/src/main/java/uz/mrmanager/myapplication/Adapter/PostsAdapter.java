@@ -32,11 +32,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         MyResponse post = posts.get(position);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.post.setText(Html.fromHtml(post.getUserId(), Html.FROM_HTML_MODE_LEGACY));
+            holder.date.setText(Html.fromHtml("DATE: "+post.getDate(), Html.FROM_HTML_MODE_LEGACY));
         } else {
-            holder.post.setText(Html.fromHtml(post.getActionType()));
+            holder.date.setText(Html.fromHtml(post.getActionType()));
         }
-        holder.site.setText(post.getId());
+        holder.site.setText("ID:" + post.getId());
+        holder.active.setText("Active:" + post.getActionType());
+
+
+
     }
 
     @Override
@@ -47,13 +51,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView post;
+        TextView date;
         TextView site;
+        TextView active;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            post = itemView.findViewById(R.id.postitem_post);
+            date = itemView.findViewById(R.id.postitem_date);
             site = itemView.findViewById(R.id.postitem_site);
+            active = itemView.findViewById(R.id.postitem_active);
         }
     }
 }
